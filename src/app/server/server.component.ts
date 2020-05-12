@@ -5,17 +5,26 @@ import {Component} from '@angular/core';
   templateUrl: './server.component.html'
 })
 export class ServerComponent {
+  serverStatus: string;
+
+  constructor() {
+     this.serverStatus = Math.random() < 0.5 ? 'offline' : 'online';
+  }
   getServerId(): number {
     return this.getRandomInt(1000, 10000);
   }
 
   getServerStatus() {
-    return Math.random() < 0.25 ? 'offline' : 'online';
+    return this.serverStatus;
   }
 
   private getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min)) + min; // The maximum is exclusive and the minimum is inclusive
+  }
+
+  getColor() {
+    return this.getServerStatus() === 'online' ? 'green' : 'red';
   }
 }
